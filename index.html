@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Crochê</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">Calculadora de Crochê</div>
+      <p class="tagline">Calcule o valor justo do seu trabalho</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== SEÇÃO: MATERIAIS ===== -->
+    <section class="card" id="section-materiais">
+      <div class="card-header">
+        <h2 class="card-title">Materiais</h2>
+      </div>
+
+      <!-- Lista de fios (gerada pelo JavaScript) -->
+      <div id="yarns-list"></div>
+
+      <button class="btn-add" onclick="addYarn()">+ adicionar fio</button>
+
+      <div class="divider"></div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="extras">Outros insumos (R$)</label>
+          <input type="number" id="extras" value="0" min="0" step="0.50" oninput="calcular()" />
+          <span class="field-hint">agulhas, botões, zíper…</span>
+        </div>
+        <div class="field">
+          <label for="overhead">Custo fixo por peça (R$)</label>
+          <input type="number" id="overhead" value="2" min="0" step="0.50" oninput="calcular()" />
+          <span class="field-hint">extras...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SEÇÃO: MÃO DE OBRA ===== -->
+    <section class="card" id="section-mao-de-obra">
+      <div class="card-header">
+        <h2 class="card-title">Mão de obra</h2>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="salary">Salário desejado / mês (R$)</label>
+          <input type="number" id="salary" value="2500" min="0" step="100" oninput="calcularHora()" />
+        </div>
+        <div class="field">
+          <label for="hours_month">Horas trabalhadas / mês</label>
+          <input type="number" id="hours_month" value="160" min="1" step="10" oninput="calcularHora()" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="hours_piece">Tempo gasto na peça (horas)</label>
+          <input type="number" id="hours_piece" value="3" min="0.25" step="0.25" oninput="calcular()" />
+        </div>
+        <div class="field">
+          <label for="hour_val">Valor / hora calculado (R$)</label>
+          <input type="number" id="hour_val" value="15.63" step="0.01" oninput="calcular()" />
+          <span class="field-hint">calculado automaticamente acima</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="section-label">Complexidade da peça</p>
+      <div class="complexity-btns">
+        <button class="cbtn active" data-v="1.0" onclick="setComplexidade(this)">Simples ×1.0</button>
+        <button class="cbtn"        data-v="1.2" onclick="setComplexidade(this)">Média ×1.2</button>
+        <button class="cbtn"        data-v="1.5" onclick="setComplexidade(this)">Complexa ×1.5</button>
+        <button class="cbtn"        data-v="2.0" onclick="setComplexidade(this)">Premium ×2.0</button>
+      </div>
+    </section>
+
+    <!-- ===== SEÇÃO: MARGEM DE LUCRO ===== -->
+    <section class="card" id="section-margem">
+      <div class="card-header">
+        <h2 class="card-title">Margem de lucro</h2>
+      </div>
+
+      <div class="margin-row">
+        <span class="margin-label">Margem</span>
+        <input
+          type="range"
+          id="margin"
+          min="10" max="200" value="30" step="5"
+          oninput="calcular(); document.getElementById('margin-out').textContent = this.value + '%'"
+        />
+        <span class="margin-val" id="margin-out">30%</span>
+      </div>
+    </section>
+
+    <!-- ===== PAINEL DE RESULTADO ===== -->
+    <section class="result-panel" id="section-resultado">
+      <div class="result-main">
+        <p class="result-label">Preço sugerido de venda</p>
+        <p class="result-price" id="final-price">R$ 0,00</p>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric">
+          <p class="metric-label">Materiais</p>
+          <p class="metric-value" id="r-mat">R$ 0</p>
+        </div>
+        <div class="metric">
+          <p class="metric-label">Mão de obra</p>
+          <p class="metric-value" id="r-labor">R$ 0</p>
+        </div>
+        <div class="metric">
+          <p class="metric-label">Lucro</p>
+          <p class="metric-value" id="r-profit">R$ 0</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Detalhamento linha a linha -->
+      <div class="breakdown" id="breakdown"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Miguel Vieira.</p>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>

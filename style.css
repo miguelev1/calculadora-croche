@@ -1,0 +1,455 @@
+/* style.css — Calculadora de Crochê
+
+   ÍNDICE:
+   1. Variáveis (cores, fontes, espaçamentos)
+   2. Reset e base
+   3. Layout principal
+   4. Header e Footer
+   5. Cards (seções)
+   6. Campos de formulário
+   7. Botões de complexidade
+   8. Slider de margem
+   9. Painel de resultado
+   10. Fios (yarn cards)
+   11. Responsividade (mobile) */
+
+
+/* 1. VARIÁVEIS — altere aqui para mudar o visual inteiro*/
+:root {
+  /* Cores principais */
+  --cor-fundo:         #f7f3ef;   /* fundo da página */
+  --cor-card:          #ffffff;   /* fundo dos cards */
+  --cor-destaque:      #c0533a;   /* cor principal (botões, preço) */
+  --cor-destaque-soft: #f5e8e4;   /* versão clara da cor destaque */
+  --cor-sucesso:       #2d7a4f;   /* cor de lucro */
+  --cor-borda:         #e8e0d8;   /* bordas */
+  --cor-texto:         #2c2420;   /* texto principal */
+  --cor-texto-suave:   #7a6a62;   /* texto secundário */
+  --cor-texto-hint:    #a89a93;   /* dicas, placeholders */
+
+  /* Tipografia */
+  --fonte-principal: times, "Times New Roman", serif;
+  --fonte-interface: arial, Helvetica, sans-serif;
+
+  /* Espaçamentos */
+  --raio-card:   14px;
+  --raio-campo:   8px;
+  --espaco-card: 20px;
+
+  /* Sombra */
+  --sombra-card: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+
+/* ============================================================
+   2. RESET E BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fonte-interface);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+
+/* 3. LAYOUT PRINCIPAL*/
+.container {
+  max-width: 680px;       /* largura máxima do conteúdo */
+  margin: 0 auto;         /* centralizado */
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;              /* espaço entre os cards */
+}
+
+
+/* 4. HEADER E FOOTER*/
+.header {
+  background-color: var(--cor-destaque);
+  color: #fff;
+  padding: 24px 16px 20px;
+  text-align: center;
+}
+
+.header-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: var(--fonte-principal);
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.tagline {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+}
+
+
+/* 5. CARDS (seções)*/
+.card {
+  background: var(--cor-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-card);
+  padding: var(--espaco-card);
+  box-shadow: var(--sombra-card);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.card-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.card-title {
+  font-family: var(--fonte-principal);
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--cor-texto);
+}
+
+.divider {
+  height: 1px;
+  background: var(--cor-borda);
+  margin: 16px 0;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 10px;
+}
+
+
+/* 6. CAMPOS DE FORMULÁRIO*/
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* 2 colunas */
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.field-row.tres-colunas {
+  grid-template-columns: 1fr 1fr 1fr;  /* 3 colunas */
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.field input,
+.field select {
+  height: 38px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-family: var(--fonte-interface);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio-campo);
+  transition: border-color 0.15s;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--cor-destaque);
+  background: #fff;
+}
+
+.field-hint {
+  font-size: 11px;
+  color: var(--cor-texto-hint);
+}
+
+
+/* 7. BOTÃO "ADICIONAR FIO"*/
+.btn-add {
+  width: 100%;
+  padding: 9px;
+  font-size: 13px;
+  color: var(--cor-destaque);
+  background: transparent;
+  border: 1.5px dashed var(--cor-destaque);
+  border-radius: var(--raio-campo);
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 4px;
+}
+
+.btn-add:hover {
+  background: var(--cor-destaque-soft);
+}
+
+
+/*7b. BOTÕES DE COMPLEXIDADE*/
+.complexity-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;   /* quebra linha no mobile */
+}
+
+.cbtn {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 4px;
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  background: transparent;
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio-campo);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cbtn:hover {
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
+}
+
+/* Botão selecionado */
+.cbtn.active {
+  background: var(--cor-destaque-soft);
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
+  font-weight: 600;
+}
+
+
+/*8. SLIDER DE MARGEM*/
+.margin-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.margin-label {
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  white-space: nowrap;
+}
+
+.margin-val {
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: right;
+  color: var(--cor-texto);
+}
+
+/* Estilo do slider (range) */
+input[type="range"] {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  background: var(--cor-borda);
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--cor-destaque);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--cor-destaque);
+  cursor: pointer;
+  border: none;
+}
+
+
+/*9. PAINEL DE RESULTADO*/
+.result-panel {
+  background: var(--cor-destaque);
+  border-radius: var(--raio-card);
+  padding: var(--espaco-card);
+  color: #fff;
+  box-shadow: var(--sombra-card);
+}
+
+.result-panel .divider {
+  background: rgba(255,255,255,0.25);
+}
+
+.result-main {
+  text-align: center;
+  padding: 12px 0 20px;
+}
+
+.result-label {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.result-price {
+  font-family: var(--fonte-principal);
+  font-size: 42px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: #fff;
+}
+
+/* Grid das 3 métricas */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.metric {
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--raio-campo);
+  padding: 10px;
+  text-align: center;
+}
+
+.metric-label {
+  font-size: 11px;
+  opacity: 0.75;
+  margin-bottom: 2px;
+}
+
+.metric-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Detalhamento de custos */
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.breakdown-row span:first-child {
+  opacity: 0.75;
+}
+
+.breakdown-row span:last-child {
+  font-weight: 600;
+}
+
+
+/*10. FIO CARD (dentro da lista de fios)*/
+.yarn-card {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-campo);
+  padding: 12px;
+  margin-bottom: 10px;
+  background: var(--cor-fundo);
+}
+
+.yarn-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.yarn-name-input {
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto);
+  width: 70%;
+  outline: none;
+  font-family: var(--fonte-interface);
+}
+
+.yarn-remove-btn {
+  font-size: 12px;
+  color: var(--cor-texto-hint);
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.yarn-remove-btn:hover {
+  color: var(--cor-destaque);
+  background: var(--cor-destaque-soft);
+}
+
+
+/*11. RESPONSIVIDADE — mobile (menos de 480px)*/
+@media (max-width: 480px) {
+  .field-row {
+    grid-template-columns: 1fr;   /* 1 coluna no celular */
+  }
+
+  .field-row.tres-colunas {
+    grid-template-columns: 1fr 1fr;  /* 2 colunas no celular */
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr; /* 2 colunas no celular */
+  }
+
+  .result-price {
+    font-size: 32px;
+  }
+
+  .complexity-btns {
+    flex-wrap: wrap;
+  }
+
+  .cbtn {
+    flex-basis: calc(50% - 4px);  /* 2 por linha */
+  }
+}
