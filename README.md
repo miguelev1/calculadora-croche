@@ -30,7 +30,8 @@ Muitos artesãos têm dificuldade em precificar o próprio trabalho — cobram p
 ### Opção 1 — Direto no navegador (sem instalar nada)
 
 ```bash
-
+# Clone o repositório
+git clone https://miguelev1.github.io/calculadora-croche/
 
 # Entre na pasta
 cd croche-preco
